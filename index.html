@@ -3,30 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Stream</title>
+    <title>Audio Stream met Achtergrond</title>
     <style>
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
-            background-color: black;
             cursor: pointer; /* laat gebruiker weten dat er geklikt kan worden */
         }
+
+        /* Achtergrondafbeelding over het hele scherm */
+        body {
+            background-image: url('https://raw.githubusercontent.com/RoelR/kerstradio/refs/heads/main/kerst.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Container voor de audio speler zonder zichtbare achtergrond */
+        #playerContainer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent; /* geen achtergrond */
+            padding: 0; /* geen padding */
+        }
+
         audio {
-            display: none;
+            width: 200px; /* stel breedte van speler in */
+            background: transparent; /* speler zelf ook transparant */
         }
     </style>
 </head>
 <body onclick="startAudio()">
-    <audio id="player" loop>
-        <source src="https://22673.live.streamtheworld.com/SRGSTR08.mp3" type="audio/mpeg">
-    </audio>
+    <div id="playerContainer">
+        <audio id="player" controls loop>
+            <source src="https://22673.live.streamtheworld.com/SRGSTR08.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
     <script>
         function startAudio() {
             const player = document.getElementById('player');
             player.play();
-            // Verwijder de click listener zodat de audio niet opnieuw start
             document.body.removeAttribute('onclick');
         }
     </script>
